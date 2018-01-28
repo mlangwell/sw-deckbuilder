@@ -24,6 +24,7 @@ import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
 import { ToolbarModule } from 'primeng/components/toolbar/toolbar';
 import { SidebarModule } from 'primeng/components/sidebar/sidebar';
+import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 
 @NgModule({
   imports: [
@@ -37,7 +38,8 @@ import { SidebarModule } from 'primeng/components/sidebar/sidebar';
     InputTextModule,
     ButtonModule,
     ToolbarModule,
-    SidebarModule
+    SidebarModule,
+    TooltipModule
   ],
   declarations: [
     AppComponent,

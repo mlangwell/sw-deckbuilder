@@ -1,5 +1,5 @@
 <div>
-  <p-toolbar [style]="{'margin-top': '-15px'}">
+  <p-toolbar [style]="{'margin-top': '-25px'}">
     <div class="ui-toolbar-group-left">
       <button pButton icon="fa-bars"></button>
     </div>
@@ -7,7 +7,7 @@
       <button pButton icon="fa-book" (click)="toggleDeckSide()"></button>
     </div>
   </p-toolbar>
-  <div style="margin-top: 15px">
+  <div style="margin-top: 25px">
     <sw-card-list></sw-card-list>
   </div>
   <button *ngIf="scrolled" class="go-to-top" (click)="gotoTop()">
