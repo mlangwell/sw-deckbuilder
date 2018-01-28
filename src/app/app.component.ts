@@ -1,4 +1,6 @@
 import { Component, HostListener } from '@angular/core';
+import { CardService } from './cards/card.service';
+import { ICard } from './cards/card.model';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,9 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   scrolled: boolean = false;
-  constructor() {}
+  isDeckVis: boolean = false;
+
+  constructor(private _cardService: CardService) {}
 
   gotoTop() {
     window.scrollTo(0, 0);
@@ -21,4 +25,24 @@ export class AppComponent {
       this.scrolled = false;
     }
   } 
+
+  toggleDeckSide() {
+    this.isDeckVis = true;
+  }
+
+  get selectedCharacters(): Array<string> {
+    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character').map((card: ICard) => card.name) : null;
+  }
+
+  get selectedUpgrades(): Array<string> {
+    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'upgrade').map((card: ICard) => card.name) : null;
+  }
+
+  get selectedSupports(): Array<string> {
+    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'support').map((card: ICard) => card.name) : null;
+  }
+
+  get selectedEvents(): Array<string> {
+    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'event').map((card: ICard) => card.name) : null;
+  }
 }

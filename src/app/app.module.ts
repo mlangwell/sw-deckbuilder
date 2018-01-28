@@ -22,6 +22,8 @@ import { DropdownModule } from 'primeng/components/dropdown/dropdown';
 import { DataScrollerModule } from 'primeng/components/datascroller/datascroller';
 import { InputTextModule } from 'primeng/components/inputtext/inputtext';
 import { ButtonModule } from 'primeng/components/button/button';
+import { ToolbarModule } from 'primeng/components/toolbar/toolbar';
+import { SidebarModule } from 'primeng/components/sidebar/sidebar';
 
 @NgModule({
   imports: [
@@ -33,7 +35,9 @@ import { ButtonModule } from 'primeng/components/button/button';
     DropdownModule,
     DataScrollerModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    ToolbarModule,
+    SidebarModule
   ],
   declarations: [
     AppComponent,

@@ -1,4 +1,51 @@
-<sw-card-list></sw-card-list>
-<button *ngIf="scrolled" class="go-to-top" (click)="gotoTop()">
-  <i class="fa fa-chevron-up"></i>
-</button>
+<div>
+  <p-toolbar [style]="{'margin-top': '-15px'}">
+    <div class="ui-toolbar-group-left">
+      <button pButton icon="fa-bars"></button>
+    </div>
+    <div class="ui-toolbar-group-right">
+      <button pButton icon="fa-book" (click)="toggleDeckSide()"></button>
+    </div>
+  </p-toolbar>
+  <div style="margin-top: 15px">
+    <sw-card-list></sw-card-list>
+  </div>
+  <button *ngIf="scrolled" class="go-to-top" (click)="gotoTop()">
+    <i class="fa fa-chevron-up"></i>
+  </button>
+  <p-sidebar [(visible)]="isDeckVis" [position]="'right'">
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h2>Current Deck List:</h2>
+      </div>
+      <div *ngIf="selectedCharacters" class="ui-g-12">
+        <h3>Characters</h3>
+        <hr>
+        <div *ngFor="let character of selectedCharacters">
+          <h5 style="margin: 0">{{character}}</h5>
+        </div>
+      </div>
+      <div *ngIf="selectedUpgrades" class="ui-g-12">
+        <h3>Upgrades</h3>
+        <hr>
+        <div *ngFor="let upgrade of selectedUpgrades">
+          <h5 style="margin: 0">{{upgrade}}</h5>
+        </div>
+      </div>
+      <div *ngIf="selectedSupports" class="ui-g-12">
+        <h3>Supports</h3>
+        <hr>
+        <div *ngFor="let support of selectedSupports">
+          <h5 style="margin: 0">{{support}}</h5>
+        </div>
+      </div>
+      <div *ngIf="selectedEvents" class="ui-g-12">
+        <h3>Events</h3>
+        <hr>
+        <div *ngFor="let event of selectedEvents">
+          <h5 style="margin: 0">{{event}}</h5>
+        </div>
+      </div>
+    </div>
+  </p-sidebar>
+</div>

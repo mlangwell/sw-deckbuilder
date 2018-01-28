@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+  margin: 0;
+}
+
 .sw-card {
   background-repeat: no-repeat;
   background-size: contain;
@@ -36,4 +40,11 @@
   position: fixed;
   bottom: 10px;
   right: 10px;
+}
+
+.ui-toolbar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  border-radius: 0 !important;
 }
