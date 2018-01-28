@@ -1,0 +1,7 @@
+<div [style.background-image]="image" class="sw-card" [ngClass]="cardSelected ? 'card-selected' : ''" (mousedown)="click()">
+  <div *ngIf="!card.imagesrc" class="no-image">
+    <h1>{{card.name}}</h1>
+    <h6>(No Image Available)</h6>
+  </div>
+</div>
+<input *ngIf="cardSelected" type="checkbox" class="center-check" checked>

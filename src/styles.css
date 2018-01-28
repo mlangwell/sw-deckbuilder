@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+.sw-card {
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  border: 0;
+}
+
+.sw-card-list {
+  height: 400px;
+  position: relative;
+}
+
+.no-image {
+  text-align: center;
+  border: 1px solid black;
+  height: 100%;
+}
+
+.card-selected {
+  opacity: 0.5;
+}
+
+.center-check {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -12.5px 0 0 -12.5px;
+}
+
+.go-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}

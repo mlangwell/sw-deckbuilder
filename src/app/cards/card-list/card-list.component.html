@@ -1,0 +1,35 @@
+<div class="ui-g ui-fluid">
+  <div class="ui-sm-10 ui-sm-offset-1 ui-md-10 ui-md-offset-1 ui-lg-8 ui-lg-offset-2 ui-xl-8 ui-xl-offset-2">
+    <p-card>
+      <div class="ui-g">
+        <div class="ui-sm-12 ui-g-10">
+          <span class="ui-float-label">
+            <input id="float-input" type="text" size="30" pInputText [(ngModel)]="searchTerm">
+            <label for="float-input">Search By: Name, Card Text, or Die Symbol</label>
+          </span>
+        </div>
+        <div class="ui-sm-12 ui-g-2 ui-fluid">
+          <button pButton label="Clear Filters" (click)="clearFilters()"></button>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
+          <p-dropdown [options]="sets" [ngModel]="selectedSet" (onChange)="setSet($event.value)" placeholder="Choose a Set" [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
+          <p-dropdown [options]="affiliations" [(ngModel)]="selectedAffiliation" placeholder="Choose an Affiliation" [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
+          <p-dropdown [options]="types" [(ngModel)]="selectedType" placeholder="Choose a Type" [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
+          <p-dropdown [options]="rarities" [(ngModel)]="selectedRarity" placeholder="Choose a Rarity" [style]="{'width':'100%'}"></p-dropdown>
+        </div>
+      </div>
+      <hr>
+      <div class="ui-g">
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let card of cards | searchFilter: searchTerm | setFilter: selectedSet | affiliationFilter: selectedAffiliation | typeFilter: selectedType | rarityFilter: selectedRarity">
+          <sw-card [card]="card"></sw-card>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</div>
