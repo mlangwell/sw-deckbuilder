@@ -42,9 +42,21 @@ body {
   right: 10px;
 }
 
+.ui-sidebar {
+  overflow-y: auto;
+}
+
 .ui-toolbar {
   position: fixed;
   width: 100%;
   z-index: 1;
   border-radius: 0 !important;
+}
+
+.red-minus {
+  color: red;
+}
+
+.green-plus {
+  color: green;
 }

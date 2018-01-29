@@ -9,23 +9,36 @@ import { CardService } from '../card.service';
 
 export class CardComponent implements OnInit {
   @Input() card: ICard;
-  cardSelected: boolean = false;
+  deckLimitVis: boolean = false;
+  charLimitVis: boolean = false;
 
   constructor(private _cardService: CardService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.card.count = 0;
+  }
 
   click() {
-    console.log(this.card);
-    this.cardSelected = !this.cardSelected;
-    if (this.cardSelected) {
-      this._cardService.addToDeck(this.card);
+    if (!this.cardSelected) {
+      if (this.card.type_code == 'character') {
+        this._cardService.addCharacter(this.card) ? null : this.charLimitVis = true;
+      } else {
+        this._cardService.addToDeck(this.card) ? null : this.deckLimitVis = true;
+      }
     } else {
-      this._cardService.removeFromDeck(this.card);
+      if (this.card.type_code == 'character') {
+        this._cardService.decreaseCharacter(this.card);
+      } else {
+        this._cardService.decreaseCard(this.card);
+      }
     }
   }
 
   get image(): string {
     return `url(${this.card.imagesrc})`;
+  }
+
+  get cardSelected(): boolean {
+    return this._cardService.isCardInDeck(this.card);
   }
 }

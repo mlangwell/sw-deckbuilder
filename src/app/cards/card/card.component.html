@@ -5,3 +5,11 @@
   </div>
 </div>
 <input *ngIf="cardSelected" type="checkbox" class="center-check" checked (change)="click()">
+
+<p-dialog header="Deck Full!" [(visible)]="deckLimitVis" [modal]="true">
+  <h3>You cannot add "{{card.name}}" to the deck because your deck is already full.</h3>
+</p-dialog>
+
+<p-dialog header="Character Pool Full!" [(visible)]="charLimitVis" [modal]="true">
+  <h3>You cannot add "{{card.name}}" to the deck because your deck would have too many characters.</h3>
+</p-dialog>

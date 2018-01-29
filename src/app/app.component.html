@@ -13,39 +13,50 @@
   <button *ngIf="scrolled" class="go-to-top" (click)="gotoTop()">
     <i class="fa fa-chevron-up"></i>
   </button>
-  <p-sidebar [(visible)]="isDeckVis" [position]="'right'">
+  <p-sidebar [(visible)]="isDeckVis" [position]="'right'" [blockScroll]="true">
     <div class="ui-g">
       <div class="ui-g-12">
         <h2>Current Deck List:</h2>
       </div>
+      <div *ngIf="deckSize === 0" class="ui-g-12">
+        <h3>You have not selected any cards!</h3>
+      </div>
       <div *ngIf="selectedCharacters" class="ui-g-12">
-        <h3>Characters</h3>
+        <h3>Characters:</h3>
         <hr>
         <div *ngFor="let character of selectedCharacters">
-          <h5 style="margin: 0">{{character}}</h5>
+          <sidebar-card [card]="character" (charAddedVis)="addCharacter($event)"></sidebar-card>
         </div>
       </div>
       <div *ngIf="selectedUpgrades" class="ui-g-12">
-        <h3>Upgrades</h3>
+        <h3>Upgrades:</h3>
         <hr>
         <div *ngFor="let upgrade of selectedUpgrades">
-          <h5 style="margin: 0">{{upgrade}}</h5>
+          <sidebar-card [card]="upgrade" (deckAddedVis)="addCard($event)"></sidebar-card>
         </div>
       </div>
       <div *ngIf="selectedSupports" class="ui-g-12">
-        <h3>Supports</h3>
+        <h3>Supports:</h3>
         <hr>
         <div *ngFor="let support of selectedSupports">
-          <h5 style="margin: 0">{{support}}</h5>
+          <sidebar-card [card]="support" (deckAddedVis)="addCard($event)"></sidebar-card>
         </div>
       </div>
       <div *ngIf="selectedEvents" class="ui-g-12">
-        <h3>Events</h3>
+        <h3>Events:</h3>
         <hr>
         <div *ngFor="let event of selectedEvents">
-          <h5 style="margin: 0">{{event}}</h5>
+          <sidebar-card [card]="event" (deckAddedVis)="addCard($event)"></sidebar-card>
         </div>
       </div>
     </div>
   </p-sidebar>
 </div>
+
+<p-dialog header="Deck Full!" [(visible)]="deckAddedVis" [modal]="true">
+  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck is already full.</h3>
+</p-dialog>
+
+<p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
+  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
+</p-dialog>

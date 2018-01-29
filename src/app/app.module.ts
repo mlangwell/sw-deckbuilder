@@ -25,6 +25,8 @@ import { ButtonModule } from 'primeng/components/button/button';
 import { ToolbarModule } from 'primeng/components/toolbar/toolbar';
 import { SidebarModule } from 'primeng/components/sidebar/sidebar';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
+import { DialogModule } from 'primeng/components/dialog/dialog';
+import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.component';
 
 @NgModule({
   imports: [
@@ -39,7 +41,8 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
     ButtonModule,
     ToolbarModule,
     SidebarModule,
-    TooltipModule
+    TooltipModule,
+    DialogModule
   ],
   declarations: [
     AppComponent,
@@ -49,7 +52,8 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
     AffiliationFilterPipe,
     TypeFilterPipe,
     RarityFilterPipe,
-    SearchFilterPipe
+    SearchFilterPipe,
+    SidebarCardComponent
   ],
   providers: [
     CardService

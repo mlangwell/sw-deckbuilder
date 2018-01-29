@@ -10,6 +10,9 @@ import { ICard } from './cards/card.model';
 export class AppComponent {
   scrolled: boolean = false;
   isDeckVis: boolean = false;
+  charAddedVis: boolean = false;
+  deckAddedVis: boolean = false;
+  tryAddCard: string;
 
   constructor(private _cardService: CardService) {}
 
@@ -30,19 +33,33 @@ export class AppComponent {
     this.isDeckVis = true;
   }
 
-  get selectedCharacters(): Array<string> {
-    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character').map((card: ICard) => card.name) : null;
+  get deckSize(): number {
+    return this._cardService.deckSize;
   }
 
-  get selectedUpgrades(): Array<string> {
-    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'upgrade').map((card: ICard) => card.name) : null;
+  get selectedCharacters(): Array<ICard> {
+    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character') : null;
   }
 
-  get selectedSupports(): Array<string> {
-    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'support').map((card: ICard) => card.name) : null;
+  get selectedUpgrades(): Array<ICard> {
+    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'upgrade') : null;
   }
 
-  get selectedEvents(): Array<string> {
-    return this._cardService.deckList.length > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'event').map((card: ICard) => card.name) : null;
+  get selectedSupports(): Array<ICard> {
+    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'support') : null;
+  }
+
+  get selectedEvents(): Array<ICard> {
+    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'event') : null;
+  }
+
+  addCharacter(event: {cardName: string, vis: boolean}) {
+    this.charAddedVis = event.vis;
+    this.tryAddCard = event.cardName;
+  }
+
+  addCard(event: {cardName: string, vis: boolean}) {
+    this.deckAddedVis = event.vis;
+    this.tryAddCard = event.cardName;
   }
 }

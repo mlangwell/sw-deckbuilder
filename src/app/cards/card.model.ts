@@ -1,4 +1,5 @@
 export interface ICard {
+  count: number,
   sides: Array<string>,
   set_code: string,
   set_name: string;
