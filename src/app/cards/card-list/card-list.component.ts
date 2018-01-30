@@ -23,6 +23,8 @@ export class CardListComponent implements OnInit {
   selectedRarity: string;
   searchTerm: string;
 
+  topN: number;
+
   constructor(
     private _cardService: CardService
   ) { }
@@ -43,6 +45,7 @@ export class CardListComponent implements OnInit {
       (cardList: Array<ICard>) => this.cards = cardList,
       (err) => console.log(err),
       () => {
+        this.topN = 20;
         let setNames: Array<string> = new Array<string>();
         let types: Array<string> = new Array<string>();
         this.cards.forEach((card: ICard) => {
@@ -61,14 +64,34 @@ export class CardListComponent implements OnInit {
     );
   }
 
+  increaseTopN() {
+    this.topN += 20;
+  }
+
   setSet(setName: string) {
     this.selectedSet = setName;
+    this.topN = 20;
     if (setName === 'Rivals') {
       this.selectedAffiliation = 'Neutral';
       this.selectedRarity = 'Starter';
     } else if (setName === 'Two-Player Game') {
       this.selectedRarity = 'Starter';
     }
+  }
+
+  setAffiliation(affiliation: string) {
+    this.selectedAffiliation = affiliation;
+    this.topN = 20;
+  }
+
+  setType(type: string) {
+    this.selectedType = type;
+    this.topN = 20;
+  }
+
+  setRarity(rarity: string) {
+    this.selectedRarity = rarity;
+    this.topN = 20;
   }
 
   clearFilters() {

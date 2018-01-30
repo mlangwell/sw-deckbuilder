@@ -26,20 +26,23 @@
           <p-dropdown [options]="sets" [ngModel]="selectedSet" (onChange)="setSet($event.value)" placeholder="Choose a Set" [style]="{'width':'100%'}"></p-dropdown>
         </div>
         <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
-          <p-dropdown [options]="affiliations" [(ngModel)]="selectedAffiliation" placeholder="Choose an Affiliation" [style]="{'width':'100%'}"></p-dropdown>
+          <p-dropdown [options]="affiliations" [ngModel]="selectedAffiliation" (onChange)="setAffiliation($event.value)" placeholder="Choose an Affiliation" [style]="{'width':'100%'}"></p-dropdown>
         </div>
         <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
-          <p-dropdown [options]="types" [(ngModel)]="selectedType" placeholder="Choose a Type" [style]="{'width':'100%'}"></p-dropdown>
+          <p-dropdown [options]="types" [ngModel]="selectedType" (onChange)="setType($event.value)" placeholder="Choose a Type" [style]="{'width':'100%'}"></p-dropdown>
         </div>
         <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
-          <p-dropdown [options]="rarities" [(ngModel)]="selectedRarity" placeholder="Choose a Rarity" [style]="{'width':'100%'}"></p-dropdown>
+          <p-dropdown [options]="rarities" [ngModel]="selectedRarity" (onChange)="setRarity($event.value)" placeholder="Choose a Rarity" [style]="{'width':'100%'}"></p-dropdown>
         </div>
       </div>
       <hr>
       <div class="ui-g">
-        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let card of cards | searchFilter: searchTerm | setFilter: selectedSet | affiliationFilter: selectedAffiliation | typeFilter: selectedType | rarityFilter: selectedRarity">
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let card of cards | searchFilter: searchTerm | setFilter: selectedSet | affiliationFilter: selectedAffiliation | typeFilter: selectedType | rarityFilter: selectedRarity | topNFilter: topN">
           <sw-card [card]="card"></sw-card>
         </div>
+      </div>
+      <div class="ui-sm-12 ui-md-6 ui-md-offset-3 ui-lg-4 ui-lg-offset-4">
+        <button pButton label="Show More..." (click)="increaseTopN()"></button>
       </div>
     </p-card>
   </div>

@@ -27,6 +27,7 @@ import { SidebarModule } from 'primeng/components/sidebar/sidebar';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DialogModule } from 'primeng/components/dialog/dialog';
 import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.component';
+import { TopNFilterPipe } from './cards/top-n-filter.pipe';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.componen
     TypeFilterPipe,
     RarityFilterPipe,
     SearchFilterPipe,
+    TopNFilterPipe,
     SidebarCardComponent
   ],
   providers: [

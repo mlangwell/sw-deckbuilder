@@ -104,4 +104,8 @@ export class CardService {
   get deckSize(): number {
     return this.deckList.length;
   }
+
+  get cardDeckSize(): number {
+    return this.deckList.filter((card: ICard) => card.type_code != 'character').length;
+  }
 }

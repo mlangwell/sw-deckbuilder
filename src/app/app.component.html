@@ -16,7 +16,10 @@
   <p-sidebar [(visible)]="isDeckVis" [position]="'right'" [blockScroll]="true">
     <div class="ui-g">
       <div class="ui-g-12">
-        <h2>Current Deck List:</h2>
+        <h2 style="text-decoration:underline">Current Deck List:</h2>
+      </div>
+      <div *ngIf="deckSize > 0" class="ui-g-12">
+        <h4 style="margin:0">{{cardDeckSize}} non-character card(s) selected</h4>
       </div>
       <div *ngIf="deckSize === 0" class="ui-g-12">
         <h3>You have not selected any cards!</h3>

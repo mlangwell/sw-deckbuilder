@@ -37,6 +37,10 @@ export class AppComponent {
     return this._cardService.deckSize;
   }
 
+  get cardDeckSize(): number {
+    return this._cardService.cardDeckSize;
+  }
+
   get selectedCharacters(): Array<ICard> {
     return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character') : null;
   }
