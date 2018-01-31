@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { CardsComponent } from './cards/cards.component';
 import { CardService } from './cards/card.service';
+import { HomeComponent } from './home/home.component';
 import { ICard } from './cards/card.model';
 
 @Component({
@@ -9,6 +11,8 @@ import { ICard } from './cards/card.model';
 })
 export class AppComponent {
   scrolled: boolean = false;
+  isSidebarVis: boolean = false;
+  isHome: boolean = false;
   isDeckVis: boolean = false;
   charAddedVis: boolean = false;
   deckAddedVis: boolean = false;
@@ -30,7 +34,15 @@ export class AppComponent {
   } 
 
   toggleDeckSide() {
-    this.isDeckVis = true;
+    this._cardService.isDeckVis = true;
+  }
+
+  toggleSidebar() {
+    this.isSidebarVis = !this.isSidebarVis;
+  }
+
+  checkComponent(event) {
+    event.constructor === HomeComponent ? this.isHome = true : this.isHome = false;
   }
 
   get deckSize(): number {

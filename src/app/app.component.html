@@ -1,19 +1,37 @@
 <div>
-  <p-toolbar [style]="{'margin-top': '-25px'}">
-    <div class="ui-toolbar-group-left">
-      <button pButton icon="fa-bars"></button>
-    </div>
+  <p-toolbar [style]="{'margin-top': '-64px'}">
+    <span class="ui-toolbar-group-left">
+      <button [style.display]="isHome ? 'none' : 'inherit'" pButton icon="fa-bars" (click)="toggleSidebar()"></button>
+      <a [routerLink]="['/home']">
+        <img class="navbar-logo" [src]="'./assets/logo.jpg'" />
+        <h2 class="navbar-text">Builder</h2>
+      </a>
+    </span>
     <div class="ui-toolbar-group-right">
-      <button pButton icon="fa-book" (click)="toggleDeckSide()"></button>
+      <button *ngIf="!isHome" pButton icon="fa-book" (click)="toggleDeckSide()"></button>
     </div>
   </p-toolbar>
-  <div style="margin-top: 25px">
-    <sw-card-list></sw-card-list>
+  <div style="margin-top: 64px">
+    <router-outlet (activate)="checkComponent($event)"></router-outlet>
   </div>
   <button *ngIf="scrolled" class="go-to-top" (click)="gotoTop()">
     <i class="fa fa-chevron-up"></i>
   </button>
-  <p-sidebar [(visible)]="isDeckVis" [position]="'right'" [blockScroll]="true">
+</div>
+<p-sidebar [(visible)]="isSidebarVis">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <img [routerLink]="['/home']" class="sidebar-logo" [src]="'./assets/logo.jpg'" (click)="toggleSidebar()" />
+    </div>
+    <div class="ui-g-12">
+      <button pButton label="Card List" icon="fa-bandcamp" [routerLink]="['/cards']" (click)="toggleSidebar()"></button>
+    </div>
+    <div class="ui-g-12">
+      <button pButton label="Deck List" icon="fa-book" [routerLink]="['/decks']" (click)="toggleSidebar()"></button>
+    </div>
+  </div>
+</p-sidebar>
+<p-sidebar [(visible)]="isDeckVis" [position]="'right'" [blockScroll]="true">
     <div class="ui-g">
       <div class="ui-g-12">
         <h2 style="text-decoration:underline">Current Deck List:</h2>
@@ -54,12 +72,11 @@
       </div>
     </div>
   </p-sidebar>
-</div>
-
-<p-dialog header="Deck Full!" [(visible)]="deckAddedVis" [modal]="true">
-  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck is already full.</h3>
-</p-dialog>
-
-<p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
-  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
-</p-dialog>
+  
+  <p-dialog header="Deck Full!" [(visible)]="deckAddedVis" [modal]="true">
+    <h3>You cannot add "{{tryAddCard}}" to the deck because your deck is already full.</h3>
+  </p-dialog>
+  
+  <p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
+    <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
+  </p-dialog>

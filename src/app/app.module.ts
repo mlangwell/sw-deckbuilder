@@ -28,9 +28,14 @@ import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DialogModule } from 'primeng/components/dialog/dialog';
 import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.component';
 import { TopNFilterPipe } from './cards/top-n-filter.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { CardsComponent } from './cards/cards.component';
+import { DecksComponent } from './decks/decks.component';
 
 @NgModule({
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
@@ -46,6 +51,7 @@ import { TopNFilterPipe } from './cards/top-n-filter.pipe';
     DialogModule
   ],
   declarations: [
+    CardsComponent,
     AppComponent,
     CardComponent,
     CardListComponent,
@@ -55,7 +61,9 @@ import { TopNFilterPipe } from './cards/top-n-filter.pipe';
     RarityFilterPipe,
     SearchFilterPipe,
     TopNFilterPipe,
-    SidebarCardComponent
+    SidebarCardComponent,
+    HomeComponent,
+    DecksComponent
   ],
   providers: [
     CardService
