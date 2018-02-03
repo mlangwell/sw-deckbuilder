@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CardsComponent } from './cards/cards.component';
 import { CardService } from './cards/card.service';
 import { HomeComponent } from './home/home.component';
@@ -9,7 +9,7 @@ import { ICard } from './cards/card.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   scrolled: boolean = false;
   isSidebarVis: boolean = false;
   isBottomSidebarVis: boolean = true;
@@ -17,9 +17,17 @@ export class AppComponent {
   isDeckVis: boolean = false;
   charAddedVis: boolean = false;
   deckAddedVis: boolean = false;
+  heroVillainVis: boolean = false;
   tryAddCard: string;
 
   constructor(private _cardService: CardService) {}
+
+  ngOnInit() {
+    const ACK: boolean = <boolean>JSON.parse(localStorage.getItem('acknowledge'));
+    if (ACK) {
+      this.isBottomSidebarVis = false;
+    }
+  }
 
   gotoTop() {
     window.scrollTo(0, 0);
@@ -44,6 +52,43 @@ export class AppComponent {
 
   checkComponent(event) {
     event.constructor === HomeComponent ? this.isHome = true : this.isHome = false;
+  }
+
+  acknowledge() {
+    this.isBottomSidebarVis = false;
+    localStorage.setItem('acknowledge', JSON.stringify(true));
+  }
+
+  addCharacter(event: {cardName: string, vis: boolean}) {
+    this.charAddedVis = event.vis;
+    this.tryAddCard = event.cardName;
+  }
+
+  addCard(event: {cardName: string, vis: boolean}) {
+    this.deckAddedVis = event.vis;
+    this.tryAddCard = event.cardName;
+  }
+
+  saveDeck() {
+    if (this._cardService.hasVillains && this._cardService.hasHeros) {
+      this.heroVillainVis = true;
+    } else {
+      this._cardService.saveDeck();
+    }
+  }
+
+  clearDeck() {
+    this._cardService.clearDeck();
+  }
+
+  removeHeroes() {
+    this.heroVillainVis = false;
+    this._cardService.removeHeroes();
+  }
+
+  removeVillains() {
+    this.heroVillainVis = false;
+    this._cardService.removeVillains();
   }
 
   get deckSize(): number {
@@ -76,23 +121,5 @@ export class AppComponent {
 
   get battlefield(): ICard {
     return this._cardService.currentDeck.hasBattlefield ? this._cardService.deckList.find((card: ICard) => card.type_code == 'battlefield') : null;
-  }
-
-  addCharacter(event: {cardName: string, vis: boolean}) {
-    this.charAddedVis = event.vis;
-    this.tryAddCard = event.cardName;
-  }
-
-  addCard(event: {cardName: string, vis: boolean}) {
-    this.deckAddedVis = event.vis;
-    this.tryAddCard = event.cardName;
-  }
-
-  saveDeck() {
-    this._cardService.saveDeck();
-  }
-
-  clearDeck() {
-    this._cardService.clearDeck();
   }
 }

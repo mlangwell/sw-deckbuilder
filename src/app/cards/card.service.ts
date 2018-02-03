@@ -139,6 +139,15 @@ export class CardService {
     return this.currentDeck.deckList.indexOf(card) >= 0;
   }
 
+  removeHeroes() {
+    this.currentDeck.deckList = this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Villain');
+  }
+
+  removeVillains() {
+    this.currentDeck.deckList = this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Hero');
+  }
+
+
   saveDeck() {
     localStorage.setItem('currentDeck', JSON.stringify(this.currentDeck));
   }
@@ -190,5 +199,13 @@ export class CardService {
 
   get hasSupports(): boolean {
     return this.currentDeck.deckList.filter((card: ICard) => card.type_code == 'support').length > 0;
+  }
+
+  get hasVillains(): boolean {
+    return this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Villain').length > 0;
+  }
+
+  get hasHeros(): boolean {
+    return this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Hero').length > 0;
   }
 }

@@ -91,10 +91,19 @@
 </p-sidebar>
 <p-sidebar [(visible)]="isBottomSidebarVis" [position]="'bottom'">
   <div class="ui-g ui-fluid">
-    <div class="ui-g-12 text-center ui-g-nopad">
-      <h3>SWD Builder uses your cookies to store your deck</h3>
-      <h3>Do not clear your cookies unless you want to lose your deck</h3>
-      <h3>User database is coming soon!</h3>
+    <div class="ui-sm-12m ui-md-8 ui-lg-6 ui-lg-offset-3 ui-xl-8 ui-xl-offset-2">
+      <div class="ui-g-12 text-center ui-g-nopad">
+        <h3 style="margin: 10px">SWD Builder uses your cookies to store your deck</h3>
+      </div>
+      <div class="ui-g-12 text-center ui-g-nopad">
+        <h3 style="margin: 10px">Do not clear your cookies unless you want to lose your deck</h3>
+      </div>
+      <div class="ui-g-12 text-center ui-g-nopad">
+        <h3 style="margin: 10px">User database is coming soon!</h3>
+      </div>
+    </div>
+    <div class="ui-sm-6 ui-sm-offset-3 ui-md-4 ui-lg-3 ui-xl-2">
+      <button class="acknowledge-button" pButton label="Acknowledge" (click)="acknowledge()"></button>
     </div>
   </div>
 </p-sidebar>
@@ -106,3 +115,17 @@
 <p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
   <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
 </p-dialog>
+
+<p-dialog header="Deck Has Heroes and Villains!" [(visible)]="heroVillainVis" [modal]="true">
+  <div class="ui-g">
+    <h3>You cannot save this deck because it contains both Heroes and Villains.</h3>
+  </div>
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-6">
+      <button pButton label="Remove Heroes" (click)="removeHeroes()"></button>
+    </div>
+    <div class="ui-g-6">
+      <button pButton label="Remove Villains" (click)="removeVillains()"></button>
+    </div>
+  </div>
+</p-dialog>z

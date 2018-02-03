@@ -1,3 +1,5 @@
+$breakSmall: 640px;
+
 /* You can add global styles to this file, and also import other style files */
 body {
   margin: 0;
@@ -125,4 +127,18 @@ a {
 
 .page-heading {
   text-decoration: underline;
+}
+
+.acknowledge-button {
+  margin-top: 60px;
+
+  @media screen and (max-width: $breakSmall) {
+    margin-top: 0;
+  }
+}
+
+.ui-float-label {
+  @media screen and (max-width: $breakSmall) {
+    font-size: 12px;
+  }
 }
