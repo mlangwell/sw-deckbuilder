@@ -18,6 +18,10 @@ export class SidebarCardComponent implements OnInit {
   removeCard() {
     if (this.card.type_code == 'character') {
       this._cardService.decreaseCharacter(this.card);
+    } else if (this.card.type_code == 'plot') {
+      this._cardService.decreasePlot(this.card);
+    } else if (this.card.type_code == 'battlefield') {
+      this._cardService.decreaseBattlefield(this.card);
     } else {
       this._cardService.decreaseCard(this.card);
     }
@@ -30,8 +34,16 @@ export class SidebarCardComponent implements OnInit {
       } else {
         this._cardService.addCharacter(this.card) ? this.charAddedVis.emit({ cardName: this.card.name, vis: false }) : this.charAddedVis.emit({ cardName: this.card.name, vis: true });
       }
-    } else if (this.card.type_code != 'character' && this.card.count < 2) {
+    } else if (this.card.count < 2) {
       this._cardService.addToDeck(this.card) ? this.deckAddedVis.emit({ cardName: this.card.name, vis: false }) : this.deckAddedVis.emit({ cardName: this.card.name, vis: true });
     }
+  }
+
+  get isPlot(): boolean {
+    return this.card.type_code == 'plot';
+  }
+
+  get isBattlefied(): boolean {
+    return this.card.type_code == 'battlefield';
   }
 }

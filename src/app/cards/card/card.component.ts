@@ -11,6 +11,8 @@ export class CardComponent implements OnInit {
   @Input() card: ICard;
   deckLimitVis: boolean = false;
   charLimitVis: boolean = false;
+  battlefieldLimitVis: boolean = false;
+  plotLimitVis: boolean = false;
 
   constructor(private _cardService: CardService) { }
 
@@ -22,12 +24,20 @@ export class CardComponent implements OnInit {
     if (!this.cardSelected) {
       if (this.card.type_code == 'character') {
         this._cardService.addCharacter(this.card) ? null : this.charLimitVis = true;
+      } else if (this.card.type_code == 'plot') {
+        this._cardService.addPlot(this.card) ? null : this.plotLimitVis = true;
+      } else if (this.card.type_code == 'battlefield') {
+        this._cardService.addBattlefield(this.card) ? null : this.battlefieldLimitVis = true;
       } else {
         this._cardService.addToDeck(this.card) ? null : this.deckLimitVis = true;
       }
     } else {
       if (this.card.type_code == 'character') {
         this._cardService.decreaseCharacter(this.card);
+      } else if (this.card.type_code == 'plot') {
+        this._cardService.decreasePlot(this.card);
+      } else if (this.card.type_code == 'battlefield') {
+        this._cardService.decreaseBattlefield(this.card);
       } else {
         this._cardService.decreaseCard(this.card);
       }

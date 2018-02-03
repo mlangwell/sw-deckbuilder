@@ -12,6 +12,7 @@ import { ICard } from './cards/card.model';
 export class AppComponent {
   scrolled: boolean = false;
   isSidebarVis: boolean = false;
+  isBottomSidebarVis: boolean = true;
   isHome: boolean = false;
   isDeckVis: boolean = false;
   charAddedVis: boolean = false;
@@ -34,7 +35,7 @@ export class AppComponent {
   } 
 
   toggleDeckSide() {
-    this._cardService.isDeckVis = true;
+    this.isDeckVis = true;
   }
 
   toggleSidebar() {
@@ -54,19 +55,27 @@ export class AppComponent {
   }
 
   get selectedCharacters(): Array<ICard> {
-    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character') : null;
+    return this._cardService.deckSize > 0 && this._cardService.hasCharacters ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'character') : null;
   }
 
   get selectedUpgrades(): Array<ICard> {
-    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'upgrade') : null;
+    return this._cardService.deckSize > 0 && this._cardService.hasUpgrades ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'upgrade') : null;
   }
 
   get selectedSupports(): Array<ICard> {
-    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'support') : null;
+    return this._cardService.deckSize > 0 && this._cardService.hasSupports ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'support') : null;
   }
 
   get selectedEvents(): Array<ICard> {
-    return this._cardService.deckSize > 0 ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'event') : null;
+    return this._cardService.deckSize > 0 && this._cardService.hasEvents ? this._cardService.deckList.filter((card: ICard) => card.type_code == 'event') : null;
+  }
+
+  get plot(): ICard {
+    return this._cardService.currentDeck.hasPlot ? this._cardService.deckList.find((card: ICard) => card.type_code == 'plot') : null;
+  }
+
+  get battlefield(): ICard {
+    return this._cardService.currentDeck.hasBattlefield ? this._cardService.deckList.find((card: ICard) => card.type_code == 'battlefield') : null;
   }
 
   addCharacter(event: {cardName: string, vis: boolean}) {
@@ -77,5 +86,13 @@ export class AppComponent {
   addCard(event: {cardName: string, vis: boolean}) {
     this.deckAddedVis = event.vis;
     this.tryAddCard = event.cardName;
+  }
+
+  saveDeck() {
+    this._cardService.saveDeck();
+  }
+
+  clearDeck() {
+    this._cardService.clearDeck();
   }
 }

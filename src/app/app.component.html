@@ -3,8 +3,7 @@
     <span class="ui-toolbar-group-left">
       <button [style.display]="isHome ? 'none' : 'inherit'" pButton icon="fa-bars" (click)="toggleSidebar()"></button>
       <a [routerLink]="['/home']">
-        <img class="navbar-logo" [src]="'./assets/logo.jpg'" />
-        <h2 class="navbar-text">Builder</h2>
+        <h2 class="navbar-text">SWD Builder</h2>
       </a>
     </span>
     <div class="ui-toolbar-group-right">
@@ -32,51 +31,78 @@
   </div>
 </p-sidebar>
 <p-sidebar [(visible)]="isDeckVis" [position]="'right'" [blockScroll]="true">
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <h2 style="text-decoration:underline">Current Deck List:</h2>
-      </div>
-      <div *ngIf="deckSize > 0" class="ui-g-12">
-        <h4 style="margin:0">{{cardDeckSize}} non-character card(s) selected</h4>
-      </div>
-      <div *ngIf="deckSize === 0" class="ui-g-12">
-        <h3>You have not selected any cards!</h3>
-      </div>
-      <div *ngIf="selectedCharacters" class="ui-g-12">
-        <h3>Characters:</h3>
-        <hr>
-        <div *ngFor="let character of selectedCharacters">
-          <sidebar-card [card]="character" (charAddedVis)="addCharacter($event)"></sidebar-card>
-        </div>
-      </div>
-      <div *ngIf="selectedUpgrades" class="ui-g-12">
-        <h3>Upgrades:</h3>
-        <hr>
-        <div *ngFor="let upgrade of selectedUpgrades">
-          <sidebar-card [card]="upgrade" (deckAddedVis)="addCard($event)"></sidebar-card>
-        </div>
-      </div>
-      <div *ngIf="selectedSupports" class="ui-g-12">
-        <h3>Supports:</h3>
-        <hr>
-        <div *ngFor="let support of selectedSupports">
-          <sidebar-card [card]="support" (deckAddedVis)="addCard($event)"></sidebar-card>
-        </div>
-      </div>
-      <div *ngIf="selectedEvents" class="ui-g-12">
-        <h3>Events:</h3>
-        <hr>
-        <div *ngFor="let event of selectedEvents">
-          <sidebar-card [card]="event" (deckAddedVis)="addCard($event)"></sidebar-card>
-        </div>
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <h2 style="text-decoration:underline">Current Deck List:</h2>
+    </div>
+    <div *ngIf="deckSize > 0" class="ui-g-12">
+      <h4 style="margin:0">{{cardDeckSize}} non-character card(s) selected</h4>
+    </div>
+    <div *ngIf="deckSize === 0" class="ui-g-12">
+      <h3>You have not selected any cards!</h3>
+    </div>
+    <div *ngIf="selectedCharacters" class="ui-g-12">
+      <h3>Characters:</h3>
+      <hr>
+      <div *ngFor="let character of selectedCharacters" class="ui-g-12">
+        <sidebar-card [card]="character" (charAddedVis)="addCharacter($event)"></sidebar-card>
       </div>
     </div>
-  </p-sidebar>
-  
-  <p-dialog header="Deck Full!" [(visible)]="deckAddedVis" [modal]="true">
-    <h3>You cannot add "{{tryAddCard}}" to the deck because your deck is already full.</h3>
-  </p-dialog>
-  
-  <p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
-    <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
-  </p-dialog>
+    <div *ngIf="plot" class="ui-g-12">
+      <h3>Plot:</h3>
+      <hr>
+      <sidebar-card [card]="plot"></sidebar-card>
+    </div>
+    <div *ngIf="battlefield" class="ui-g-12">
+      <h3>Battlefield:</h3>
+      <hr>
+      <sidebar-card [card]="battlefield"></sidebar-card>
+    </div>
+    <div *ngIf="selectedUpgrades" class="ui-g-12">
+      <h3>Upgrades:</h3>
+      <hr>
+      <div *ngFor="let upgrade of selectedUpgrades" class="ui-g-12">
+        <sidebar-card [card]="upgrade" (deckAddedVis)="addCard($event)"></sidebar-card>
+      </div>
+    </div>
+    <div *ngIf="selectedSupports" class="ui-g-12">
+      <h3>Supports:</h3>
+      <hr>
+      <div *ngFor="let support of selectedSupports" class="ui-g-12">
+        <sidebar-card [card]="support" (deckAddedVis)="addCard($event)"></sidebar-card>
+      </div>
+    </div>
+    <div *ngIf="selectedEvents" class="ui-g-12">
+      <h3>Events:</h3>
+      <hr>
+      <div *ngFor="let event of selectedEvents" class="ui-g-12">
+        <sidebar-card [card]="event" (deckAddedVis)="addCard($event)"></sidebar-card>
+      </div>
+    </div>
+    <div *ngIf="deckSize > 0" class="ui-g-12 ui-fluid">
+      <div class="ui-g-6">
+        <button pButton icon="fa-save" label="Save" (click)="saveDeck()"></button>
+      </div>
+      <div class="ui-g-6">
+        <button pButton icon="fa-trash" label="Clear" (click)="clearDeck()"></button>
+      </div>
+    </div>
+  </div>
+</p-sidebar>
+<p-sidebar [(visible)]="isBottomSidebarVis" [position]="'bottom'">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12 text-center ui-g-nopad">
+      <h3>SWD Builder uses your cookies to store your deck</h3>
+      <h3>Do not clear your cookies unless you want to lose your deck</h3>
+      <h3>User database is coming soon!</h3>
+    </div>
+  </div>
+</p-sidebar>
+
+<p-dialog header="Deck Full!" [(visible)]="deckAddedVis" [modal]="true">
+  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck is already full.</h3>
+</p-dialog>
+
+<p-dialog header="Character Pool Full!" [(visible)]="charAddedVis" [modal]="true">
+  <h3>You cannot add "{{tryAddCard}}" to the deck because your deck would have too many characters.</h3>
+</p-dialog>

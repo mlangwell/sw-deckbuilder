@@ -32,6 +32,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CardsComponent } from './cards/cards.component';
 import { DecksComponent } from './decks/decks.component';
+import { DeckComponent } from './decks/deck/deck.component';
+import { AccordionModule } from 'primeng/components/accordion/accordion';
 
 @NgModule({
   imports: [
@@ -48,7 +50,8 @@ import { DecksComponent } from './decks/decks.component';
     ToolbarModule,
     SidebarModule,
     TooltipModule,
-    DialogModule
+    DialogModule,
+    AccordionModule
   ],
   declarations: [
     CardsComponent,
@@ -63,7 +66,8 @@ import { DecksComponent } from './decks/decks.component';
     TopNFilterPipe,
     SidebarCardComponent,
     HomeComponent,
-    DecksComponent
+    DecksComponent,
+    DeckComponent
   ],
   providers: [
     CardService

@@ -1,0 +1,70 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="ui-g-12">
+      <h1 class="page-heading text-center">Current Deck:</h1>
+    </div>
+    <div class="ui-g-12 text-center" *ngIf="isDeckEmpty">
+      <h3>You have not added any cards to your deck!</h3>
+      <h3>Go to the
+        <a [routerLink]="['/cards']">Card List</a> to add some cards!</h3>
+    </div>
+  </div>
+</div>
+<div class="ui-g">
+  <div class="ui-sm-12 ui-md-12 ui-lg-10 ui-lg-offset-1 ui-xl-8 ui-xl-offset-2">
+    <p-accordion>
+      <p-accordionTab header="Characters:" [selected]="true">
+        <div class="ui-g">
+          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let character of characters">
+            <div [style.background-image]="'url(' + character.imagesrc + ')'" class="sw-card">
+              <div *ngIf="!character.imagesrc" class="no-image">
+                <h1>{{character.name}}</h1>
+                <h6>(No Image Available)</h6>
+              </div>
+            </div>
+            <div class="text-center">x{{character.count}}</div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Supports:">
+        <div class="ui-g">
+          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let support of supports">
+            <div [style.background-image]="'url(' + support.imagesrc + ')'" class="sw-card">
+              <div *ngIf="!support.imagesrc" class="no-image">
+                <h1>{{support.name}}</h1>
+                <h6>(No Image Available)</h6>
+              </div>
+            </div>
+            <div class="text-center">x{{support.count}}</div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Upgrades:">
+        <div class="ui-g">
+          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let upgrade of upgrades">
+            <div [style.background-image]="'url(' + upgrade.imagesrc + ')'" class="sw-card">
+              <div *ngIf="!upgrade.imagesrc" class="no-image">
+                <h1>{{upgrade.name}}</h1>
+                <h6>(No Image Available)</h6>
+              </div>
+            </div>
+            <div class="text-center">x{{upgrade.count}}</div>
+          </div>
+        </div>
+      </p-accordionTab>
+      <p-accordionTab header="Events:">
+        <div class="ui-g">
+          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let event of events">
+            <div [style.background-image]="'url(' + event.imagesrc + ')'" class="sw-card">
+              <div *ngIf="!event.imagesrc" class="no-image">
+                <h1>{{event.name}}</h1>
+                <h6>(No Image Available)</h6>
+              </div>
+            </div>
+            <div class="text-center">x{{event.count}}</div>
+          </div>
+        </div>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

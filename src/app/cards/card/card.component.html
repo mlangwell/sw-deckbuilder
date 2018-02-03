@@ -13,3 +13,11 @@
 <p-dialog header="Character Pool Full!" [(visible)]="charLimitVis" [modal]="true">
   <h3>You cannot add "{{card.name}}" to the deck because your deck would have too many characters.</h3>
 </p-dialog>
+
+<p-dialog header="Already Have A Battlefield!" [(visible)]="battlefieldLimitVis" [modal]="true">
+  <h3>You cannot add "{{card.name}}" to the deck because your deck already has a battlefied.</h3>
+</p-dialog>
+
+<p-dialog header="Cannot Add Plot!" [(visible)]="plotLimitVis" [modal]="true">
+  <h3>You cannot add "{{card.name}}" to the deck because your deck either already has a plot or has too many character points.</h3>
+</p-dialog>

@@ -13,7 +13,7 @@ body {
 }
 
 .sw-card-list {
-  height: 400px;
+  height: 350px;
   position: relative;
 }
 
@@ -50,8 +50,20 @@ body {
   }
 }
 
-a:hover {
-  color: blue !important;
+.ui-sidebar-bottom {
+  padding: 0 !important;
+}
+
+a {
+  color: blue;
+
+  &:visited {
+    color: purple;
+  }
+
+  &:hover {
+    color: lightblue;
+  }
 }
 
 .ui-toolbar {
@@ -79,11 +91,17 @@ a:hover {
 }
 
 .red-minus {
+  border: 1px solid black;
   color: red;
+  padding: 3px;
+  cursor: pointer;
 }
 
 .green-plus {
+  border: 1px solid black;
   color: green;
+  padding: 3px;
+  cursor: pointer;
 }
 
 .text-center {
@@ -102,5 +120,9 @@ a:hover {
 
 .navbar-text {
   float: right;
-  margin: 5px 0px 0px 5px;
+  margin: 5px 5px 5px 5px;
+}
+
+.page-heading {
+  text-decoration: underline;
 }
