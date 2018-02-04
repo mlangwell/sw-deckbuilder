@@ -13,7 +13,6 @@ export class CardService {
   constructor(private _httpClient: HttpClient) { 
     const DECK: Deck = this.getDeck();
     DECK ? this.currentDeck = DECK : this.currentDeck = new Deck(new Array<ICard>(), 0, 0, false, false);
-    console.log(this.currentDeck);
   }
 
   getCardList(): Observable<Array<ICard>> {
