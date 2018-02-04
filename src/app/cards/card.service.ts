@@ -13,6 +13,7 @@ export class CardService {
   constructor(private _httpClient: HttpClient) { 
     const DECK: Deck = this.getDeck();
     DECK ? this.currentDeck = DECK : this.currentDeck = new Deck(new Array<ICard>(), 0, 0, false, false);
+    console.log(this.currentDeck);
   }
 
   getCardList(): Observable<Array<ICard>> {
@@ -136,7 +137,7 @@ export class CardService {
   }
 
   isCardInDeck(card: ICard): boolean {
-    return this.currentDeck.deckList.indexOf(card) >= 0;
+    return this.currentDeck.deckList.find((deckCard: ICard) => deckCard.name == card.name) != null;
   }
 
   removeHeroes() {
