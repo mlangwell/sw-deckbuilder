@@ -15,6 +15,12 @@ import { AffiliationFilterPipe } from './cards/affiliations-filter.pipe';
 import { TypeFilterPipe } from './cards/type-filter.pipe';
 import { RarityFilterPipe } from './cards/rarity-filter.pipe';
 import { SearchFilterPipe } from './cards/search-filter.pipe';
+import { TopNFilterPipe } from './cards/top-n-filter.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { CardsComponent } from './cards/cards.component';
+import { DecksComponent } from './decks/decks.component';
+import { DeckComponent } from './decks/deck/deck.component';
 
 // PrimeNg
 import { CardModule } from 'primeng/components/card/card';
@@ -27,13 +33,8 @@ import { SidebarModule } from 'primeng/components/sidebar/sidebar';
 import { TooltipModule } from 'primeng/components/tooltip/tooltip';
 import { DialogModule } from 'primeng/components/dialog/dialog';
 import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.component';
-import { TopNFilterPipe } from './cards/top-n-filter.pipe';
-import { AppRoutingModule } from './app-routing.module';
-import { HomeComponent } from './home/home.component';
-import { CardsComponent } from './cards/cards.component';
-import { DecksComponent } from './decks/decks.component';
-import { DeckComponent } from './decks/deck/deck.component';
 import { AccordionModule } from 'primeng/components/accordion/accordion';
+import { ProgressSpinnerModule } from 'primeng/components/progressspinner/progressspinner'
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { AccordionModule } from 'primeng/components/accordion/accordion';
     SidebarModule,
     TooltipModule,
     DialogModule,
-    AccordionModule
+    AccordionModule,
+    ProgressSpinnerModule
   ],
   declarations: [
     CardsComponent,

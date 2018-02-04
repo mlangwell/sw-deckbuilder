@@ -12,6 +12,7 @@ class PrimeNgDropdown {
   templateUrl: 'card-list.component.html'
 })
 export class CardListComponent implements OnInit {
+  isLoading: boolean;
   cards: Array<ICard>;
   sets: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
   affiliations: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
@@ -30,16 +31,7 @@ export class CardListComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.affiliations.push(new PrimeNgDropdown('All', ''));
-    this.affiliations.push(new PrimeNgDropdown('Neutral', 'Neutral'));
-    this.affiliations.push(new PrimeNgDropdown('Villain', 'Villain'));
-    this.affiliations.push(new PrimeNgDropdown('Hero', 'Hero'));
-    this.rarities.push(new PrimeNgDropdown('All', ''));
-    this.rarities.push(new PrimeNgDropdown('Starter', 'Starter'));
-    this.rarities.push(new PrimeNgDropdown('Common', 'Common'));
-    this.rarities.push(new PrimeNgDropdown('Uncommon', 'Uncommon'));
-    this.rarities.push(new PrimeNgDropdown('Rare', 'Rare'));
-    this.rarities.push(new PrimeNgDropdown('Legendary', 'Legendary'));
+    this.isLoading = true;
     this._cardService.getCardList()
     .subscribe(
       (cardList: Array<ICard>) => this.cards = cardList,
@@ -60,6 +52,17 @@ export class CardListComponent implements OnInit {
         this.types.push(new PrimeNgDropdown('All', ''));
         setNames.forEach((setName: string) => this.sets.push(new PrimeNgDropdown(setName, setName)));
         types.forEach((type: string) => this.types.push(new PrimeNgDropdown(type, type)));
+        this.affiliations.push(new PrimeNgDropdown('All', ''));
+        this.affiliations.push(new PrimeNgDropdown('Neutral', 'Neutral'));
+        this.affiliations.push(new PrimeNgDropdown('Villain', 'Villain'));
+        this.affiliations.push(new PrimeNgDropdown('Hero', 'Hero'));
+        this.rarities.push(new PrimeNgDropdown('All', ''));
+        this.rarities.push(new PrimeNgDropdown('Starter', 'Starter'));
+        this.rarities.push(new PrimeNgDropdown('Common', 'Common'));
+        this.rarities.push(new PrimeNgDropdown('Uncommon', 'Uncommon'));
+        this.rarities.push(new PrimeNgDropdown('Rare', 'Rare'));
+        this.rarities.push(new PrimeNgDropdown('Legendary', 'Legendary'));
+        this.isLoading = false;
       }
     );
   }
