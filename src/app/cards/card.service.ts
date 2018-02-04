@@ -21,7 +21,7 @@ export class CardService {
 
   addToDeck(card: ICard): boolean {
     if (this.cardDeckSize < 30) {
-      let cardIndex = this.currentDeck.deckList.indexOf(card);
+      let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
       if (cardIndex < 0) {
         card.count++;
         this.currentDeck.cardDeckSize++;
@@ -39,7 +39,7 @@ export class CardService {
 
   addCharacter(card: ICard): boolean {
     let charPoint: number = 0;
-    let cardIndex = this.currentDeck.deckList.indexOf(card);
+    let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
 
     if (cardIndex < 0) {
       if (card.is_unique) {
@@ -95,7 +95,7 @@ export class CardService {
   }
 
   decreaseCard(card: ICard) {
-    let cardIndex = this.currentDeck.deckList.indexOf(card);
+    let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
     this.cardDeckSize--;
     this.currentDeck.deckList[cardIndex].count--;
 
@@ -105,7 +105,7 @@ export class CardService {
   }
 
   decreaseCharacter(card: ICard) {
-    let cardIndex = this.currentDeck.deckList.indexOf(card)
+    let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
     let charPoint: number = 0;
     if (card.is_unique) {
       charPoint = card.count > 1 ? card.points.split('/').map(point => +point)[1] : card.points.split('/').map(point => +point)[0];
@@ -115,20 +115,20 @@ export class CardService {
     this.characterPoints -= charPoint;
     this.currentDeck.deckList[cardIndex].count--;
 
-    if (this.currentDeck.deckList[cardIndex].count == 0) {
+    if (this.currentDeck.deckList[cardIndex].count <= 0) {
       this.currentDeck.deckList.splice(cardIndex, 1);
     }
   }
 
   decreaseBattlefield(card: ICard) {
-    let cardIndex = this.currentDeck.deckList.indexOf(card);
+    let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
     this.currentDeck.deckList[cardIndex].count = 0;
     this.currentDeck.deckList.splice(cardIndex, 1);
     this.currentDeck.hasBattlefield = false;
   }
 
   decreasePlot(card: ICard) {
-    let cardIndex = this.currentDeck.deckList.indexOf(card);
+    let cardIndex = this.currentDeck.deckList.map((card: ICard) => card.name).indexOf(card.name);
     this.currentDeck.deckList[cardIndex].count = 0;
     this.currentDeck.deckList.splice(this.currentDeck.deckList.indexOf(card), 1);
     this.currentDeck.hasPlot = false;
@@ -186,26 +186,26 @@ export class CardService {
   }
 
   get hasCharacters(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.type_code == 'character').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.type_code).indexOf('character') >= 0;
   }
 
   get hasUpgrades(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.type_code == 'upgrade').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.type_code).indexOf('upgrade') >= 0;
   }
 
   get hasEvents(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.type_code == 'event').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.type_code).indexOf('event') >= 0;
   }
 
   get hasSupports(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.type_code == 'support').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.type_code).indexOf('support') >= 0;
   }
 
   get hasVillains(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Villain').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.affiliation_code).indexOf('villain') >= 0;
   }
 
   get hasHeros(): boolean {
-    return this.currentDeck.deckList.filter((card: ICard) => card.affiliation_name == 'Hero').length > 0;
+    return this.currentDeck.deckList.map((card: ICard) => card.affiliation_code).indexOf('hero') >= 0;
   }
 }
