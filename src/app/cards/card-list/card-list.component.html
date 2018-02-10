@@ -36,11 +36,15 @@
           <p-dropdown [options]="rarities" [ngModel]="selectedRarity" (onChange)="setRarity($event.value)" placeholder="Choose a Rarity"
             [style]="{'width':'100%'}"></p-dropdown>
         </div>
+        <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3">
+          <p-dropdown [options]="colors" [ngModel]="selectedColor" (onChange)="setColor($event.value)" placeholder="Choose a Color"
+            [style]="{'width':'100%'}"></p-dropdown>
+        </div>
       </div>
       <hr>
       <ng-container *ngIf="!isLoading; else loading">
         <div class="ui-g">
-          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let card of cards | searchFilter: searchTerm | setFilter: selectedSet | affiliationFilter: selectedAffiliation | typeFilter: selectedType | rarityFilter: selectedRarity | topNFilter: topN">
+          <div class="ui-sm-12 ui-md-6 ui-lg-4 ui-xl-3 sw-card-list" *ngFor="let card of cards | searchFilter: searchTerm | setFilter: selectedSet | affiliationFilter: selectedAffiliation | typeFilter: selectedType | rarityFilter: selectedRarity | topNFilter: topN | colorFilter: selectedColor">
             <sw-card [card]="card"></sw-card>
           </div>
         </div>

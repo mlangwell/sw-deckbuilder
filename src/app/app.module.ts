@@ -35,6 +35,7 @@ import { DialogModule } from 'primeng/components/dialog/dialog';
 import { SidebarCardComponent } from './cards/sidebar-card/sidebar-card.component';
 import { AccordionModule } from 'primeng/components/accordion/accordion';
 import { ProgressSpinnerModule } from 'primeng/components/progressspinner/progressspinner'
+import { ColorFilterPipe } from './cards/color-filter.pipe';
 
 @NgModule({
   imports: [
@@ -66,6 +67,7 @@ import { ProgressSpinnerModule } from 'primeng/components/progressspinner/progre
     RarityFilterPipe,
     SearchFilterPipe,
     TopNFilterPipe,
+    ColorFilterPipe,
     SidebarCardComponent,
     HomeComponent,
     DecksComponent,

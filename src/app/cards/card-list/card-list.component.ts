@@ -18,10 +18,12 @@ export class CardListComponent implements OnInit {
   affiliations: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
   types: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
   rarities: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
+  colors: Array<PrimeNgDropdown> = new Array<PrimeNgDropdown>();
   selectedSet: string;
   selectedAffiliation: string;
   selectedType: string;
   selectedRarity: string;
+  selectedColor: string;
   searchTerm: string;
 
   topN: number;
@@ -62,6 +64,10 @@ export class CardListComponent implements OnInit {
         this.rarities.push(new PrimeNgDropdown('Uncommon', 'Uncommon'));
         this.rarities.push(new PrimeNgDropdown('Rare', 'Rare'));
         this.rarities.push(new PrimeNgDropdown('Legendary', 'Legendary'));
+        this.colors.push(new PrimeNgDropdown('Red', 'red'));
+        this.colors.push(new PrimeNgDropdown('Blue', 'blue'));
+        this.colors.push(new PrimeNgDropdown('Yellow', 'yellow'));
+        this.colors.push(new PrimeNgDropdown('Gray', 'gray'));
         this.isLoading = false;
       }
     );
@@ -94,6 +100,11 @@ export class CardListComponent implements OnInit {
 
   setRarity(rarity: string) {
     this.selectedRarity = rarity;
+    this.topN = 20;
+  }
+
+  setColor(color: string) {
+    this.selectedColor = color;
     this.topN = 20;
   }
 
